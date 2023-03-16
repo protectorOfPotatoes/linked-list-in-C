@@ -43,6 +43,7 @@ void append_to_linklist(linklist_t* list, node_t* new_node, int _data)
 void append(linklist_t* list, int _data) {
     node_t* node_1 = (node_t*)malloc(sizeof(node_t));
     append_to_linklist(list, node_1, _data);
+    
 }
 void print_linklist(linklist_t* list)
 {
@@ -54,7 +55,15 @@ void print_linklist(linklist_t* list)
     }
     printf("NULL\n");
 }
-
+void free_linklist(linklist_t* list) {
+    node_t* current = list->headptr;
+    while (current != NULL)
+    {
+        free(current);
+        current = current->next; 
+    }
+    free(list);
+}
 int main(void) {
     linklist_t* list = create_linklist();
     append(list, 3);
@@ -62,8 +71,7 @@ int main(void) {
     append(list, 5);
     append(list, 6);
     append(list, 7);
-
     print_linklist(list);
+    free_linklist(list);
     return 0;
-}
-// result : 3->->4->5->6->7
+}// result : 3->4->5->6->7->NULL
