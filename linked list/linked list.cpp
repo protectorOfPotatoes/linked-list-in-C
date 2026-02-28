@@ -59,8 +59,9 @@ void free_linklist(linklist_t* list) {
     node_t* current = list->headptr;
     while (current != NULL)
     {
-        free(current);
+	node_t* temp = current;        
         current = current->next; 
+	free(temp);
     }
     free(list);
 }
